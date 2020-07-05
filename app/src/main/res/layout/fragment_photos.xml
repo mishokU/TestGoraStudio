@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.testgorastudio.domain.viewModel.PhotosViewModel" />
+    </data>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.photos.PhotosFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/photosToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Photos"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photosRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                tools:listitem="@layout/photo_item"
+                tools:itemCount="3"
+                app:photosList="@{viewModel.photos}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            app:errorPhotosHandler="@{viewModel.photos}">
+
+            <TextView
+                android:id="@+id/error_photos_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/refresh_photos_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:onClick="@{() -> viewModel.fetchPhotos(viewModel.userId)}"
+                android:text="@string/refresh"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/photos_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            app:photoProgress="@{viewModel.photos}"/>
+
+
+    </FrameLayout>
+</layout>

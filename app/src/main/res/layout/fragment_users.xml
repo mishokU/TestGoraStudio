@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.testgorastudio.domain.viewModel.UsersViewModel" />
+    </data>
+    
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.users.UsersFragment">
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/usersToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Users"/>
+    
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/usersRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:usersList="@{viewModel.users}"
+                tools:listitem="@layout/user_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            app:usersErrorHandler="@{viewModel.users}">
+
+            <TextView
+                android:id="@+id/userError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/refresh_photos_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:onClick="@{() -> viewModel.refreshUsers()}"
+                android:textAllCaps="false"
+                android:text="@string/refresh"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            app:usersProgress="@{viewModel.users}"/>
+    
+    </FrameLayout>
+</layout>

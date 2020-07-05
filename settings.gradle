@@ -1,0 +1,2 @@
+rootProject.name='TestGoraStudio'
+include ':app'

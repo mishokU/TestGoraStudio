@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/usersFragment">
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.example.testgorastudio.ui.users.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_albumsFragment"
+            app:destination="@id/albumsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="com.example.testgorastudio.ui.photos.PhotosFragment"
+        android:label="fragment_photos"
+        tools:layout="@layout/fragment_photos">
+
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.example.testgorastudio.domain.models.UserUIModel" />
+
+    </fragment>
+
+</navigation>
